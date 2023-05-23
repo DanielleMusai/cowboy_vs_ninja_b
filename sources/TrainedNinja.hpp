@@ -11,9 +11,10 @@ class TrainedNinja : public Ninja
     {
     public:
         TrainedNinja(const std::string &name, const Point &location);
-        virtual ~TrainedNinja();
+       // virtual ~TrainedNinja();
         std::string print() const;
-    };
+    // };
 
+};
 }
 #endif //TRAINEDNINJE_HPP// 

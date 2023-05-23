@@ -1,37 +1,37 @@
 #ifndef TEAM_HPP
 #define TEAM_HPP
-#include <algorithm>
-#include <iostream>
-#include <limits>
+
+#include <string>
 #include <vector>
+#include <iostream>
+#include <sstream>
 #include "Character.hpp"
-#include "Cowboy.hpp"
-#include "Ninja.hpp"
-#include "SmartTeam.hpp"
-#include "TrainedNinja.hpp"
 #include "YoungNinja.hpp"
 #include "OldNinja.hpp"
+#include "TrainedNinja.hpp"
+#include "Point.hpp"
+#include "Cowboy.hpp"
+using namespace std;
 namespace ariel
 {
+
     class Team
     {
-    private:
-        Character *leader_;
-        Character *findCharacter(const Character *character, const std::vector<Character *> &characters) const;
-        void chooseNewLeader();
-
-
     public:
-   std::vector<Character *> fighters_;
-        Team() : leader_(nullptr) {};
         Team(Character *leader);
-        void add(Character *fighter);
-        void attack(Team *enemyTeam);
-        int stillAlive() const;
-        void print() const;
-        ~Team();
-        
+        virtual ~Team();
+        virtual void add(Character *fighter);
+        virtual void attack(Team *other);
+        virtual int stillAlive() const;
+        virtual void print() const;
+        virtual Character *closeToleader(Team *other);
+        virtual Character *getLeader() { return this->leader_; }
+
+    protected:
+        std::vector<Character *> fighters_;
+        Character *leader_;
     };
+
 }
 
 #endif // TEAM_HPP

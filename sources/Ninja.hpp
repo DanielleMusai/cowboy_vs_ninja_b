@@ -11,10 +11,11 @@ namespace ariel
     {
     private:
         int speed;
+        int damage;
 
     public:
         Ninja(const std::string &name, const Point &location,int hitPoints, int speed);
-        virtual ~Ninja();
+       // virtual ~Ninja();
 
         void move(Character *enemy);
         void slash(Character *enemy);

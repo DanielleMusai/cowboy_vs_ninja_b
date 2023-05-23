@@ -7,7 +7,7 @@ namespace ariel
 YoungNinja::YoungNinja(const std::string &name, const Point &location)
         :Ninja(name,location, 100, 14)  {}
 
-    YoungNinja::~YoungNinja() {}
+    //YoungNinja::~YoungNinja() {}
 
     
     std::string YoungNinja::print() const

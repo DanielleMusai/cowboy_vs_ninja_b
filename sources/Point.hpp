@@ -17,7 +17,8 @@ namespace ariel {
         double distance(const Point& point) const;
         void print() const;
         static Point moveTowards(const Point& source, const Point& destination, double distance);
-
+        // double setX(double dotx) {return this->x= dotx;}
+        // double setY(double doty){return this->y= doty;}
     };
 
 } // namespace ariel

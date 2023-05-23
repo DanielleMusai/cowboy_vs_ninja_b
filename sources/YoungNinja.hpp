@@ -10,9 +10,10 @@ namespace ariel
     {
     public:
         YoungNinja(const std::string &name, const Point &location);
-        virtual ~YoungNinja();
+     //   virtual ~YoungNinja();
         std::string print() const;
     };
+
 }
 
 #endif //YOUNGNINJA_HPP//

@@ -5,11 +5,11 @@ namespace ariel {
 
 
     Ninja::Ninja(const std::string &name, const Point &location, int hitPoints, int speed)
-        : Character(name,location,110), speed(speed) {}
+        : Character(name,location,hitPoints), speed(speed) {}
   
 
 
-    Ninja::~Ninja() {}
+    //Ninja::~Ninja() {}
 
     void Ninja::move(Character* enemy) {
         if (enemy != nullptr && isAlive()) {
@@ -23,9 +23,9 @@ namespace ariel {
             location = Point(newX, newY);
         }
         }
+       
     }
-
-    void Ninja::slash(Character* enemy) {
+void Ninja::slash(Character* enemy) {
          if (enemy == this) {
         throw std::runtime_error("Cannot slash oneself.");
     }
@@ -37,13 +37,11 @@ namespace ariel {
         throw std::runtime_error("Cannot attack a dead enemy.");
     }
 
-        //if (enemy != nullptr && isAlive()) {
+        if (enemy->isAlive() && isAlive()) {
             double distance = location.distance(enemy->getLocation());
             if (distance < 1) {
                 enemy->hit(40);
-            //}
+           }
         }
     }
-
-
 } // namespace ariel

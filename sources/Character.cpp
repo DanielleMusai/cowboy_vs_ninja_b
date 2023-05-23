@@ -13,9 +13,10 @@ namespace ariel
         return hitPoints;
     }
 
-    void Character::setHitPoints(int hitPoints) {
-    hitPoints = hitPoints;
-}
+    void Character::setHitPoints(int hitPoints)
+    {
+        hitPoints = hitPoints;
+    }
     bool Character::isAlive() const
     {
         return hitPoints > 0;
@@ -28,12 +29,11 @@ namespace ariel
 
     void Character::hit(int amount)
     {
-        if(amount < 0)
+        if (amount < 0)
         {
             throw std::invalid_argument("negative value");
         }
         hitPoints -= amount;
-    
     }
 
     std::string Character::getName() const
@@ -62,15 +62,23 @@ namespace ariel
         }
     }
 
-     void Character::setTeam() {
-        team_ = 1;
+    void Character::fighterchange(bool x)
+    {
+        // teamfighter_ = !teamfighter_;
+        teamfighter_ = x;
     }
 
-    int Character::getTeam() const {
-        return team_;
+    // int Character::getTeam() const {
+    //     return team_;
+    // }
+
+    bool Character::teamFighter() const
+    {
+        return teamfighter_;
     }
-//     void Character::setAlive(bool alive) {
-//     alive_ = alive;
-// }
+
+    //     void Character::setAlive(bool alive) {
+    //     alive_ = alive;
+    // }
 
 } // namespace ariel

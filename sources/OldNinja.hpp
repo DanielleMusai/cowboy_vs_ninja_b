@@ -12,7 +12,7 @@ class OldNinja : public Ninja
     {
     public:
         OldNinja(const std::string &name, const Point &location);
-        virtual ~OldNinja();
+       // virtual ~OldNinja();
         std::string print() const;
     };
 
