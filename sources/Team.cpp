@@ -16,7 +16,7 @@ Team::Team(Character* leader) {
         }
         else{
         _fighters.push_back(leader);
-        leader->fighter_change();
+        leader->updateFighterState();
        _leader=leader;
     
         }
@@ -27,7 +27,7 @@ void Team::add(Character* fighter) {
     {
         throw std::runtime_error("over 10 fighters");
     }
-    fighter->fighter_change();
+    fighter->updateFighterState();
     this->_fighters.push_back(fighter);
 }
 
