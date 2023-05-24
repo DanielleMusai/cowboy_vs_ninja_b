@@ -11,25 +11,28 @@
 #include "TrainedNinja.hpp"
 #include "Point.hpp"
 #include "Cowboy.hpp"
-using namespace std;
 namespace ariel
 {
-
+    using namespace std;
     class Team
     {
+    protected:
+        static const int MAX_FIGHTERS = 10;
+        std::vector<Character *> _fighters;
+        Character *_leader;
+
     public:
         Team(Character *leader);
-        virtual ~Team();
-        virtual void add(Character *fighter);
+        virtual void add(Character *member);
         virtual void attack(Team *other);
+        void updateLeader();
+        void attackCowboys(Team *other);
+        void attackNinjas(Team *other);
+        virtual Character *closeToleader(Team *other);
+        virtual Character *getLeader() { return this->_leader; }
         virtual int stillAlive() const;
         virtual void print() const;
-        virtual Character *closeToleader(Team *other);
-        virtual Character *getLeader() { return this->leader_; }
-
-    protected:
-        std::vector<Character *> fighters_;
-        Character *leader_;
+        virtual ~Team();
     };
 
 }

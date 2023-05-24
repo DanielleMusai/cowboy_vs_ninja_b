@@ -1,26 +1,26 @@
 #ifndef POINT_HPP
 #define POINT_HPP
 
-#include <cmath>
+namespace ariel{
 
-namespace ariel {
-
-    class Point {
+class Point {
     private:
-        double x;
-        double y;
-
+        double _dtx;
+        double _dty;
+        
     public:
-        Point(double xCoord, double yCoord);
+        Point(double dtx, double dty);
+        virtual ~Point(){};
         double getX() const;
         double getY() const;
-        double distance(const Point& point) const;
-        void print() const;
-        static Point moveTowards(const Point& source, const Point& destination, double distance);
-        // double setX(double dotx) {return this->x= dotx;}
-        // double setY(double doty){return this->y= doty;}
+        double setX(double dtx) {return this->_dtx=dtx;}
+        double setY(double dty){return this->_dty=dty;}
+        double distance(const Point& other)const;
+        static Point moveTowards(const Point& source, const Point& target, double distance);
+        void print();
+
+    
     };
 
-} // namespace ariel
-
-#endif  // POINT_HPP
+}
+#endif

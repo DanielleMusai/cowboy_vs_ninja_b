@@ -1,50 +1,56 @@
 #include "Point.hpp"
-#include <cmath>
+#include <string>
 #include <iostream>
+#include <math.h>
+using namespace std;
 
-namespace ariel {
+namespace ariel
+{
 
-    Point::Point(double xCoord, double yCoord) : x(xCoord), y(yCoord) {}
+    Point::Point(double dtx, double dty)
+        : _dtx(dtx), _dty(dty){};
 
-    double Point::getX() const 
+    double Point::getX() const
     {
-        return x;
+        return _dtx;
+    }
+    double Point::getY() const
+    {
+        return _dty;
     }
 
-    double Point::getY() const 
+    double Point::distance(const Point &other) const
     {
-        return y;
-    }
-
-    double Point::distance(const Point& point) const 
-    {
-        double dx = x - point.x;
-        double dy = y - point.y;
+        double dx = _dtx - other._dtx;
+        double dy = _dty - other._dty;
         return std::sqrt(dx * dx + dy * dy);
-    }
+    };
 
-    void Point::print() const 
+    Point Point::moveTowards(const Point &source, const Point &target, double distance)
     {
-        std::cout << "(" << x << ", " << y << ")";
-    }
-
-
-    Point Point::moveTowards(const Point& source, const Point& destination, double distance)
-    {
-        if(distance < 0)
+        if (distance < 0)
         {
-             throw std::invalid_argument("There is no such a thing as negative distance");
+            throw std::invalid_argument("distance cannot br negative");
         }
-        double dx = destination.x - source.x;
-        double dy = destination.y - source.y;
-        double currentDistance = std::sqrt(dx * dx + dy * dy);
-        if (currentDistance <= distance) {
-            return destination;
+
+        double dis = source.distance(target);
+        if (dis <= distance)
+        {
+            return target;
         }
-        double ratio = distance / currentDistance;
-        double newX = source.x + ratio * dx;
-        double newY = source.y + ratio * dy;
-        return Point(newX, newY);
+        else
+        {
+
+            double ratio = distance / dis;
+            double dx = target.getX() - source.getX();
+            double dy = target.getY() - source.getY();
+            Point res = Point(source.getX() + ratio * dx, source.getY() + ratio * dy);
+            return res;
+        }
     }
 
-} // namespace ariel
+    void Point::print()
+    {
+        cout << "(" << getX() << "," << getY() << ")" << endl;
+    }
+}

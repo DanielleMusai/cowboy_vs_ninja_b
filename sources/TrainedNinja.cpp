@@ -1,20 +1,15 @@
-//#include "Character.hpp"
 #include "TrainedNinja.hpp"
+using namespace std;
+
 namespace ariel
 {
 
- 
- TrainedNinja::TrainedNinja(const std::string &name, const Point &location)
-        : Ninja(name,location, 120,12)  {}
-
- //   TrainedNinja::~TrainedNinja() {}
-
-    
-    std::string TrainedNinja::print() const
+    TrainedNinja::TrainedNinja(const std::string &name, const Point &location)
+        : Ninja(name, location)
     {
-        std::string output = "Character: N (Trained Ninja), Name: " + getName() + ", Hit Points: " + std::to_string(hitPoints) + ", Location: ";
-       output = output + "(" + std::to_string(getLocation().getX()) + "," + std::to_string(getLocation().getY()) + ")";
-
-        return output;
+        this->_type = "N";
+        this->_hitPoint = 120;
+        this->_speed = 12;
+        this->_fighter = false;
     }
 }

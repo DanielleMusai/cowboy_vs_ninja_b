@@ -1,61 +1,50 @@
-// #include "Character.hpp"
 #include "Cowboy.hpp"
-using namespace std;
+#include <string>
+#include <stdexcept>
+
 namespace ariel
 {
+Cowboy::Cowboy(const std::string& name, const Point& location)
+:Character(name,location), _stack(6){
+    this->_type="C";
+    this->_hitPoint=110;
 
-    Cowboy::Cowboy(const std::string &name, const Point &location)
-        : Character(name, location, 110), bullets(6) {}
+}
 
-    Cowboy::~Cowboy() {}
-
-    void Cowboy::shoot(Character *enemy)
+ void Cowboy::shoot(Character *other)
     {
-        if (enemy == this)
-        {
-            throw std::runtime_error("Cannot shoot oneself.");
-        }
-        if (!isAlive())
-        {
-            throw std::runtime_error("Cannot attack when dead.");
-        }
-        if (!enemy->isAlive())
-        {
-            throw std::runtime_error("Cannot attack a dead enemy.");
-        }
+        if (other == this)
+            throw std::runtime_error("Cannot shoot oneself. (Cowboy::shoot)");
 
-        if (hasboolets())
+        if (!isAlive())
+            throw std::runtime_error("Cannot attack with a dead character. (Cowboy::shoot)");
+
+        if (other->isAlive())
         {
-            enemy->hit(10);
-            bullets--;
+            if (_stack > 0)
+            {
+                other->hit(10);
+                _stack--;
+            }
+        }
+        else
+        {
+           throw std::runtime_error("Cannot attack a dead enemy. (Cowboy::shoot)");
         }
     }
 
     bool Cowboy::hasboolets() const
     {
-        return bullets > 0;
+        return _stack > 0;
     }
 
     void Cowboy::reload()
     {
-
-        if (!this->isAlive())
+        if (!isAlive())
         {
-            throw std::runtime_error("Cannot attack when dead.");
+            throw std::runtime_error("Cannot reload with a dead character");
         }
-
-        // const int maxBullets = 6; // Maximum number of bullets in the magazine
-
-        // if (bullets == 0) {
-        bullets = 6;
-        //}
-    }
-
-    std::string Cowboy::print() const
-    {
-        std::string output = "Character: C (Cowboy), Name: " + getName() + ", Hit Points: " + std::to_string(hitPoints) + ", Location: ";
-        output = output + "(" + std::to_string(getLocation().getX()) + "," + std::to_string(getLocation().getY()) + ")";
-        return output;
+        _stack = 6;
     }
 
 }

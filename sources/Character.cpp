@@ -1,84 +1,69 @@
 #include "Character.hpp"
 #include <iostream>
+using namespace std;
 
 namespace ariel
 {
-    Character::Character(const std::string &name, const Point &location, int hitPoints)
-        : name(name), location(location), hitPoints(hitPoints) {}
 
-    Character::~Character() {}
+Character::Character(const std::string &name, const Point &location)
+    : _name(name), _location(location), _fighter(false){};
 
-    int Character::getHitPoints() const
+std::string Character::print() const
+{
+    std::string typeStr = (this->getType() == "C") ? "Type: C" : "Type: N";
+    std::string hpStr = (this->_hitPoint > 0) ? "hitPoint: " + std::to_string(this->_hitPoint) : "dead";
+
+    std::string locationStr = "location: ( " + std::to_string(this->_location.getX()) + " , " + std::to_string(this->_location.getY()) + " )";
+
+    return typeStr + " name: " + this->getName() + " " + locationStr + " " + hpStr;
+}
+
+double Character::distance(const Character *other) const
+{
+    return this->_location.distance(other->getLocation());
+}
+
+void Character::hit(int damage)
+{
+    if (damage < 0)
     {
-        return hitPoints;
+        throw std::invalid_argument("damage cannot be negative");
     }
+    _hitPoint -= damage;
+}
 
-    void Character::setHitPoints(int hitPoints)
-    {
-        hitPoints = hitPoints;
-    }
-    bool Character::isAlive() const
-    {
-        return hitPoints > 0;
-    }
+bool Character::isAlive() const
+{
+    return _hitPoint > 0;
+}
 
-    double Character::distance(const Character *other) const
-    {
-        return location.distance(other->getLocation());
-    }
+const std::string &Character::getName() const
+{
+    return _name;
+}
 
-    void Character::hit(int amount)
-    {
-        if (amount < 0)
-        {
-            throw std::invalid_argument("negative value");
-        }
-        hitPoints -= amount;
-    }
+const Point &Character::getLocation() const
+{
+    return _location;
+}
+int Character::isInTeam() const
+{
+    return inTeam_;
+}
 
-    std::string Character::getName() const
-    {
-        return name;
-    }
+void Character::setInTeam()
+{
+    inTeam_ = 1;
+}
+bool Character::isfighter() const
+{
+    return this->_fighter;
+}
 
-    Point Character::getLocation() const
-    {
-        return location;
-    }
+void Character::fighter_change()
+{
+    _fighter = !_fighter;
+}
 
-    void Character::print() const
-    {
-        if (isAlive())
-        {
-            std::cout << "Name: " << name << std::endl;
-            std::cout << "Hit Points: " << hitPoints << std::endl;
-            std::cout << "Location: (" << location.getX() << ", " << location.getY() << ")" << std::endl;
-        }
-        else
-        {
-            std::cout << "Name: " << name << std::endl;
-            std::cout << "Character is dead." << std::endl;
-            std::cout << "Location: (" << location.getX() << ", " << location.getY() << ")" << std::endl;
-        }
-    }
 
-    void Character::fighterchange(bool x)
-    {
-        // teamfighter_ = !teamfighter_;
-        teamfighter_ = x;
-    }
-
-    // int Character::getTeam() const {
-    //     return team_;
-    // }
-
-    bool Character::teamFighter() const
-    {
-        return teamfighter_;
-    }
-
-    //     void Character::setAlive(bool alive) {
-    //     alive_ = alive;
-    // }
-
-} // namespace ariel
+}

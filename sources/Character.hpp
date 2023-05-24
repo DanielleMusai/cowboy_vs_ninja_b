@@ -3,36 +3,45 @@
 #include "Point.hpp"
 #include <string>
 using namespace std;
-
 namespace ariel
 {
-  class Team;
-  class Character
-  {
+    class Character
+    {
 
-  public:
-    bool appointed = false;
-    Character(const std::string &name, const Point &location, int hitPoints);
-    virtual ~Character();
-    int getHitPoints() const;
-    void setHitPoints(int hitPoints);
-    bool isAlive() const;                          //
-    double distance(const Character *other) const; //
-    void hit(int amount);                          //
-    std::string getName() const;
-    Point getLocation() const; //
-    void print() const;        //
-    void fighterchange(bool x);
-    bool teamFighter() const;
+    protected:
+        string _name;
+        Point _location;
+        int _hitPoint;
+        bool _fighter;
+        string _type;
+        int inTeam_;
 
-  protected:
-    std::string name;
-    int hitPoints;
-    Point location;
-    // int team_;
-    bool teamfighter_;
-    string type_;
-    //  Team* team_; // Pointer to the team the character belongs to
-  };
+    public:
+        Character(const std::string &name, const Point &location);
+        virtual ~Character(){};
+        virtual std::string print() const;
+        virtual double distance(const Character *other) const;
+        virtual void hit(int damage);
+        virtual bool isAlive() const;
+        virtual const std::string &getName() const;
+        virtual const Point &getLocation() const;
+        virtual int isInTeam() const;
+        virtual void setInTeam();
+        virtual bool isfighter() const;
+        virtual void fighter_change();
+
+        virtual void setType(string type) { this->_type = type; }
+        virtual std::string getType() const { return this->_type; }
+        virtual void setlocation(double dtx, double dty)
+        {
+            this->_location.setX(dtx);
+            this->_location.setY(dty);
+        }
+        // virtual  void setLocation(const Point& newLocation) {
+        //     this->_location = newLocation;
+        // }
+    };
+
 }
-#endif // CHARACTER_HPP
+
+#endif

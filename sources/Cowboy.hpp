@@ -1,27 +1,23 @@
 #ifndef COWBOY_HPP
 #define COWBOY_HPP
 
-#include <string>
 #include "Character.hpp"
-#include <stdexcept>
 using namespace std;
 namespace ariel
 {
-  
-  
-  class Cowboy : public Character
+
+    class Cowboy : public Character
     {
     private:
-        int bullets;
+        int _stack;
+        //static constexpr int DEFAULT_BULLETS = 6;
+       // static constexpr int DEFAULT_LIVE = 110;
 
     public:
         Cowboy(const std::string &name, const Point &location);
-        virtual ~Cowboy();
-
-        void shoot(Character *enemy);
+        void shoot(Character *other);
         bool hasboolets() const;
         void reload();
-        std::string print() const;
     };
 }
-#endif //COWBOY_HPP//
+#endif

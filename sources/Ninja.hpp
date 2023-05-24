@@ -1,27 +1,21 @@
 #ifndef NINJA_HPP
 #define NINJA_HPP
-#include <stdexcept>
-
 #include "Character.hpp"
 
 namespace ariel
 {
-
     class Ninja : public Character
     {
-    private:
-        int speed;
-        int damage;
+
+    protected:
+        int _speed;
 
     public:
-        Ninja(const std::string &name, const Point &location,int hitPoints, int speed);
-       // virtual ~Ninja();
-
-        void move(Character *enemy);
-        void slash(Character *enemy);
-     //   std::string print() const;
+        Ninja(const std::string &name, const Point &location);
+        virtual ~Ninja(){};
+        virtual void slash(Character *other);
+        virtual void move(Character *other);
     };
-
-   
 }
-#endif //NINJA_HPP//
+
+#endif
